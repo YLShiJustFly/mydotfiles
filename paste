@@ -1,0 +1,9 @@
+1. install lemonade on local and remote machine
+   go get -d github.com/lemonade-command/lemonade
+   cd $GOPATH/src/github.com/lemonade-command/lemonade/
+   make install
+2. echo "lemonade server --allow=\"127.0.0.1,::1\" --port=2489 --line-ending=\"lf\"" > /usr/local/bin/lemonade_daemon
+   chmod +x lemonade_daemon
+3. when you ssh to remote machine, use 
+   ssh -p $PORT -R 2489:localhost:2489 $USER@$IP
+   and you should local launch a process "lemonade"
