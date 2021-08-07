@@ -1,0 +1,14 @@
+on run {input, parameters}
+    tell application "iTerm 2"
+		reopen
+		activate
+	end tell
+    tell application "iTerm 2"
+		reopen
+		activate
+	end tell
+	tell application "System Events"
+        key code 36 using {command down}
+    end tell
+    return input
+end run
