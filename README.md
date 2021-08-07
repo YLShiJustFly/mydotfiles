@@ -6,4 +6,4 @@ my settings for coding almost using keyboards under mac, including:
 4. Make it ok to use p to paste contents of local clipboard in neovim on remote machine, and use yy to copy contents to local clipboard in neovim on remote machine.
 5. Use Automator with apple script to support open local iterm2, or you can do other workflow.
 6. Set vim as external tools of idea or any other jetbrains' product. As you set to launch in idea, it will open vim in iterm2, or macvim with the cursor at the same line and      column as it is in idea.
-7. Rime setting file. Support when use default words db, it does not re-sort, but when your use the words db you dynamically generate, it will follow default words db by Frequency of use.
+7. Rime setting file use wubi86. Support when use default words db, it does not re-sort, but when your use the words db you dynamically generate, it will follow default words db by Frequency of use.
