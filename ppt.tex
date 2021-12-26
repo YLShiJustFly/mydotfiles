@@ -1,0 +1,156 @@
+\documentclass[aspectratio=169,fontset=windows,UTF-8,10pt,xcolor={usenames,dvipsnames,svgnames,x11names}]{beamer}
+\usepackage[space]{ctex}
+\usetheme{cleancode}
+%\usetikzlibrary{shadows}
+\usepackage{tikz}
+\usepackage{bookmark}
+\usepackage{diagbox}
+\usepackage[absolute,overlay,showboxes]{textpos}
+\usepackage{indentfirst} 
+
+\begin{document}
+%首页
+{
+    \usebackgroundtemplate{\tikz[overlay,remember picture]\node[opacity=1]at (current page.center){\includegraphics[height=\paperheight,width=\paperwidth]{"/Users/shiyaoliang/z.我的资料/f.试验/ppt/jpg/z.jpg"}};}
+    \begin{frame}[fragile]
+        \begin{center}
+        \Large 
+            基于lsp和neovim的半隔离网络环境\\
+                     c++开发环境搭建
+            \\[4\baselineskip]
+        %\small
+            %钟吕---块存储
+        \end{center}
+    \end{frame}
+}
+
+%\frame 
+%{
+    %\frametitle{\secname}
+    %\tableofcontents
+    %%\tableofcontents
+%}
+
+%目录
+\section[Contents]{}
+\frame 
+{
+    \frametitle{\secname}
+    \tableofcontents[pausesections]
+    %\tableofcontents
+}
+
+\AtBeginSection[] 
+{
+    \frame<handout:0> 
+    {
+        \frametitle{Contents}
+        \tableofcontents[current,currentsection]
+    }
+}
+
+\usebackgroundtemplate{\tikz[overlay,remember picture]\node[anchor=45]at ([xshift=10ex,yshift=-5ex] current page.45) {\includegraphics[height=0.1\paperheight,width=0.2\paperwidth]{"/Users/shiyaoliang/z.我的资料/f.试验/ppt/jpg/z.jpg"}};}
+\section{lsp简介}
+\begin{frame}[fragile]
+    \frametitle{lsp简介}
+    \setlength{\parindent}{2em}
+    近两年基于language server protocol（后文简称lsp）的language server和language client都在持续发展，已经到了可以使用的程度。
+    这不仅使vscode的功能更加强大，也造福了其他功能可扩展的编辑器。
+    对于vim而言，受益于lsp，可以拥有和vscode完全一样的语法检测和定义跳转等的体验，并且更加轻量。
+    \\[1\baselineskip]
+    现在ata上关于lsp介绍的文章还很少，本文旨在基于vim的lsp，在开发机的半网络隔离环境下，搭建C++开发环境。
+\end{frame}
+
+\section{vim VS neovim}
+\begin{frame}[fragile]
+\frametitle{vim VS neovim}
+    \begin{table}[h]
+        \centering
+        \caption{vim VS neovim}
+        \label{tab1}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \diagbox{特性}{vim发行版} & neovim & vim \\
+            \hline
+            版本迭代    & 快     & 慢\\
+            \hline
+            支持feature & 多     & 少\\
+            \hline
+        \end{tabular}
+    \end{table}
+%目前除了vim外，还可以选择使用neovim，版本迭代更快，支持的fearture也更多，比如vim如果需要支持系统剪贴板，需要重新编译vim，如果需要映射meta键，mac上是option，windows上是alt，需要在vimrc文件里进行映射。而neovim的使用新一代的版本发行工具AppImage，可以直接下载可执行文件使用，天然支持系统剪贴板和meta键映射，配合emonade可以实现远程开发机和本地剪贴板互通，非常方便。我个人使用的是neovim，后面的介绍也是基于neovim。
+\end{frame}
+
+\section{nvimlsp VS coc.nvim}
+\begin{frame}[fragile]
+\frametitle{nvimlsp VS coc.nvim}
+    \begin{table}[h]
+        \centering
+        \caption{nvimlsp VS coc.nvim}
+        \label{tab2}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            \diagbox{特性}{lsp类型} & coc.nvim & nvimlsp & 其他\\
+            \hline
+            版本迭代     & 快     & 快    & 慢\\
+            \hline
+            支持feature  & 多     & 多    & 少\\
+            \hline
+            支持language & 多     & 多    & 少\\
+            \hline
+            稳定性       & 稳定   & 较稳定& 较稳定\\
+            \hline
+            补全体验     & 较快   & 快    & 较快\\
+            \hline
+            安装难度     & 较难   & 难    & 较难\\
+            \hline
+        \end{tabular}
+    \end{table}
+%在vim上可用的lsp主要是coc.nvim、vim-lsp等，coc.nvim是一个中国人主导开发的vim插件，实际是一个以lsp为主的插件平台，迭代速度、性能、支持的语言以及feature都大幅领先其他lsp插件。neovim除了coc.nvim外，0.5及以上版本还可以使用neovim内置的lsp，但目前而言，neovim内置的lsp还不成熟，补全的插件现在有comp，比前一代的compe性能和准确度有很大提升，但综合体验还不如coc.nvim，并且内置lsp的性能不如coc.nvim，index文件不显示进度，这些都是硬伤，因此现在更推荐coc.nvim。当然基于neovim的生态，以后neovim的内置lsp可能会超过coc.nvim，但以我个人的使用体验而言，至少0.7的dev版和coc.nvim的差距还比较大。
+\end{frame}
+
+\section{vim-plug VS packer.nvim}
+\begin{frame}[fragile]
+\frametitle{vim-plug VS packer.nvim}
+    \begin{table}[h]
+        \centering
+        \caption{vim-plug VS packer.nvim}
+        \label{tab3}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \diagbox{特性}{包管理工具} & packer.nvim & vim-plug \\
+            \hline
+            使用语言             & lua       & vimscript\\
+            \hline
+            lazyload支持程度     & 高        & 低\\
+            \hline
+            是否内置             & 是        & 否\\
+            \hline
+            插件生态             & 较好      & 好\\
+            \hline
+            分块管理支持         & 好        & 较好\\
+            \hline
+        \end{tabular}
+    \end{table}
+%我个人使用vim插件管理工具vim-plug和packer.nvim。packer.nvim使用lua语言进行配置文件的编写，功能和vim-plug差不多，多了一些lazy load的功能，对neovim打开的速度有百ms级别的优化，可以提升对neovim的速度敏感的用户的体验。使用packer是以后的趋势，通常vim与emacs对比时，配置文件的语言vimscript是常被诟病的一点，而把配置文件语言改为lua无疑是为了补齐这块短板。
+\end{frame}
+
+\section{ccls VS clangd}
+\hypersetup{colorlinks}
+\begin{frame}[fragile]
+    \frametitle{ccls VS clangd}
+    \setlength{\parindent}{2em}
+    c++的language server有两个，ccls和clangd。\\
+    ccls是微软官方维护的C++ language server，是使用lsp进行c++开发的首选，clangd最新的版本对lsp的支持也不错。
+    \\[1\baselineskip]
+    ccls编译方法见：\\ 
+    https://ata.alibaba-inc.com/articles/221681?spm=ata.25287382.0.0.1e2e45afqlKrPE
+\end{frame}
+
+%尾页
+{
+    \usebackgroundtemplate{\tikz[overlay,remember picture]\node[opacity=1]at (current page.center){\includegraphics[height=\paperheight,width=\paperwidth]{"/Users/shiyaoliang/z.我的资料/f.试验/ppt/jpg/z.jpg"}};}
+    \begin{frame}
+    \end{frame}
+}
+\end{document}
