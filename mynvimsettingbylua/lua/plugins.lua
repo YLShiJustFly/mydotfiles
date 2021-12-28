@@ -1,118 +1,155 @@
-  -- Only required if you have packer in your `opt` pack
-  vim.cmd [[packadd! packer.nvim]]
-   return require('packer').startup(function()
+-- Only required if you have packer in your `opt` pack
+
+local plug_url_format = ""
+if vim.g.is_linux then
+  plug_url_format = "https://hub.fastgit.org/%s"
+else
+  plug_url_format = "https://github.com/%s"
+end
+vim.cmd [[packadd! packer.nvim]]
+
+return require('packer').startup(function()
     use {'wbthomason/packer.nvim', opt = true}
-    use 'kana/vim-textobj-user'
-    use 'kana/vim-textobj-indent'
-    use 'kana/vim-textobj-syntax'
-    use 'kana/vim-textobj-line'
-    use 'kana/vim-textobj-entire'
-    use 'sgur/vim-textobj-parameter'
-    use 'glts/vim-textobj-comment'
-    use 'Julian/vim-textobj-brace'
-    use 'tpope/vim-unimpaired'
-    use 'tpope/vim-surround'
-    use 'dkprice/vim-easygrep'
-    use 'preservim/nerdcommenter'
-    use 'tpope/vim-repeat'
-    use 'tpope/vim-rsi'
-    use 'jiangmiao/auto-pairs'
-    use 'easymotion/vim-easymotion'
-    use 'rhysd/clever-f.vim'
-    use 'tommcdo/vim-exchange'
-    use 'terryma/vim-expand-region'
-    use 'psliwka/vim-smoothie'
-    use 'rhysd/accelerated-jk'
-    use 'ryanoasis/vim-devicons'
-    use 'bling/vim-airline'
-    use 'vim-airline/vim-airline-themes'
-    use 'machakann/vim-highlightedyank'
-    use 'mbbill/undotree'
-    use 'kshenoy/vim-signature'
-    use 'liuchengxu/vim-clap'
-    use 'mhinz/vim-janah'
-    use 'farmergreg/vim-lastplace'
-    use 'xolox/vim-misc'
-    use 'xolox/vim-session'
-    use 'skywind3000/vim-terminal-help'
-    use 'skywind3000/asyncrun.vim'
-    use 'skywind3000/asynctasks.vim'
-    use 'airblade/vim-rooter'
-    use 'mileszs/ack.vim'
-    use 'rking/ag.vim'
-    use 'dyng/ctrlsf.vim'
-    use 'jeetsukumaran/vim-buffergator'
-    use 'ConradIrwin/vim-bracketed-paste'
-    use 'derekwyatt/vim-fswitch'
-    use 'honza/vim-snippets'
-    use 'SirVer/ultisnips'
-    use 'stsewd/tree-sitter-comment'
-    use 'kevinhwang91/nvim-bqf'
+
+    use {'kana/vim-textobj-user'}
+    use {'kana/vim-textobj-indent'}
+    use {'kana/vim-textobj-syntax'}
+    use {'kana/vim-textobj-line'}
+    use {'kana/vim-textobj-entire'}
+    use {'sgur/vim-textobj-paramete'}
+    use {'glts/vim-textobj-comment'}
+    use {'Julian/vim-textobj-brace'}
+    use {'preservim/nerdcommenter'}
+    use {'tpope/vim-unimpaired'}
+    use {'jiangmiao/auto-pairs'}
+    use {'tpope/vim-surround', event = 'BufEnter'}
+    use {'dkprice/vim-easygrep', event = 'BufEnter'}
+    use {'tpope/vim-repeat', event = 'BufEnter'}
+    use {'tpope/vim-rsi', event = 'BufEnter'}
+    use {'easymotion/vim-easymotion', event = 'BufEnter'}
+    use {'rhysd/clever-f.vim', event = 'BufEnter'}
+    use {'tommcdo/vim-exchange', event = 'BufEnter'}
+    use {'terryma/vim-expand-region', event = 'BufEnter'}
+    use {'psliwka/vim-smoothie', event = 'BufEnter'}
+    use {'rhysd/accelerated-jk', event = 'BufEnter'}
+
+    use 'glepnir/dashboard-nvim'
+    use {'machakann/vim-highlightedyank', event = 'BufEnter'}
+    use {'mbbill/undotree', event = 'BufEnter'}
+    use {'kshenoy/vim-signature', event = 'BufEnter'}
+    use {'liuchengxu/vim-clap'}
+
+    use {'mhinz/vim-janah', event = 'VimEnter'}
+    use {'farmergreg/vim-lastplace', event = 'VimEnter'}
+    use {'xolox/vim-misc', event = 'VimEnter'}
+    use {'xolox/vim-session', event = 'VimEnter'}
+
+    use {'skywind3000/vim-terminal-help', event = 'BufEnter'}
+    use {'skywind3000/asyncrun.vim', event = 'BufEnter'}
+    use {'skywind3000/asynctasks.vim', event = 'BufEnter'}
+    use {'airblade/vim-rooter', event = 'BufEnter'}
+    use {'mileszs/ack.vim', event = 'BufEnter'}
+    use {'rking/ag.vim', event = 'BufEnter'}
+    use {'dyng/ctrlsf.vim', event = 'BufEnter'}
+    use {'jeetsukumaran/vim-buffergator', event = 'BufEnter'}
+    use {'ConradIrwin/vim-bracketed-paste', event = 'BufEnter'}
+    use {'Shougo/defx.nvim', event = 'BufEnter'}
+    use {'kristijanhusak/defx-icons', event = 'BufEnter'}
+    use {'kristijanhusak/defx-git', event = 'BufEnter'}
+    use {'derekwyatt/vim-fswitch', event = 'BufEnter'}
+    use {'honza/vim-snippets', event = 'BufEnter'}
+    use {'SirVer/ultisnips', ft = {'tex'}, event = 'BufEnter'}
+    use {'lervag/vimtex', event = 'BufEnter'}
+    use {'kevinhwang91/nvim-bqf', event = 'BufEnter'}
+
+    use {'stsewd/tree-sitter-comment'}
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use 'tree-sitter/tree-sitter-cpp'
-    use 'nvim-treesitter/nvim-treesitter-refactor'
-    use 'nvim-treesitter/playground'
-    use 'p00f/nvim-ts-rainbow'
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'ludovicchabant/vim-gutentags'
-    use 'skywind3000/gutentags_plus'
+    use {'tree-sitter/tree-sitter-cpp'}
+    use {'nvim-treesitter/nvim-treesitter-refactor'}
+    use {'nvim-treesitter/playground'}
+    use {'p00f/nvim-ts-rainbow'}
+    use {'nvim-treesitter/nvim-treesitter-textobjects'}
+
+    use {'ludovicchabant/vim-gutentags', event = 'BufEnter'}
+    use {'skywind3000/gutentags_plus', event = 'BufEnter'}
     use 'altercation/vim-colors-solarized'
-    use 'DanilaMihailov/beacon.nvim'
-    use 'justinmk/vim-dirvish'
-    use {'Yggdroot/LeaderF', run = ':LeaderfInstallCExtension'}
-    use 'preservim/tagbar'
-    use 'mhinz/vim-signify'
-    use 'tpope/vim-fugitive'
-    use 'moll/vim-bbye'
-    use 'will133/vim-dirdiff'
-    use 'aymericbeaumet/vim-symlink'
-    use 'mg979/vim-visual-multi'
-    use 'liuchengxu/vim-which-key'
+    use {'DanilaMihailov/beacon.nvim', event = 'BufEnter'}
+    use {'justinmk/vim-dirvish', event = 'BufEnter'}
+
+    use {'Yggdroot/LeaderF', run = ':LeaderfInstallCExtension', event = 'BufEnter'}
+    use {'preservim/tagbar', event = 'BufEnter'}
+    use {'mhinz/vim-signify', event = 'BufEnter'}
+    use {'tpope/vim-fugitive', event = 'BufEnter'}
+    use {'moll/vim-bbye', event = 'BufEnter'}
+    use {'will133/vim-dirdiff', event = 'BufEnter'}
+    use {'mg979/vim-visual-multi', event = 'BufEnter'}
+    use {'liuchengxu/vim-which-key', event = 'BufEnter'}
     use {'puremourning/vimspector',
             setup = [[vim.g.vimspector_enable_mappings = 'VISUAL_STUDIO']],
-        }
-    use 'lewis6991/impatient.nvim'
-    --日历和笔记
-    use 'vimwiki/vimwiki'
-    use 'mattn/calendar-vim'
-    --markdown相关
-    use 'godlygeek/tabular'
-    use 'tpope/vim-markdown'
-    use 'iamcco/mathjax-support-for-mkdp'
-    use 'iamcco/markdown-preview.nvim'
-    use 'ferrine/md-img-paste.vim'
-    use 'mzlogin/vim-markdown-toc'
-    use 'jszakmeister/markdown2ctags'
-    use 'joker1007/vim-markdown-quote-syntax'
-    --PlantUML相关
-    use 'aklt/plantuml-syntax'
-    use 'tyru/open-browser.vim'
-    use 'weirongxu/plantuml-previewer.vim'
-    --翻译
-    use 'ianva/vim-youdao-translater'
-    --切换中文输入法
-    use 'CodeFalling/fcitx-vim-osx'
-    use 'kyazdani42/nvim-web-devicons'
-    --表格
-    use 'dhruvasagar/vim-table-mode'
+            event = 'BufEnter'
+    }
+    use {'lewis6991/impatient.nvim', event = 'BufEnter'}
+
     --缩进线
-    use 'Yggdroot/indentLine'
-    use 'glepnir/dashboard-nvim'
-    use 'lervag/vimtex'
-    use 'Shougo/defx.nvim'
-    use 'kristijanhusak/defx-icons'
-    use 'kristijanhusak/defx-git'
+    use {'Yggdroot/indentLine', event = 'BufEnter'}
+    use 'dhruvasagar/vim-table-mode'
+    --日历和笔记
+    use {'vimwiki/vimwiki', event = 'BufEnter'}
+    use {'mattn/calendar-vim', event = 'BufEnter'}
+    --markdown相关
+    use {'godlygeek/tabular', ft = {'md'}, event = 'BufEnter'}
+    use {'tpope/vim-markdown', ft = {'md'}, event = 'BufEnter'}
+    use {'iamcco/mathjax-support-for-mkdp', ft = {'md'}, event = 'BufEnter'}
+    use {'iamcco/markdown-preview.nvim', ft = {'md'}, event = 'BufEnter'}
+    use {'ferrine/md-img-paste.vim', ft = {'md'}, event = 'BufEnter'}
+    use {'mzlogin/vim-markdown-toc', ft = {'md'}, event = 'BufEnter'}
+    use {'jszakmeister/markdown2ctags', ft = {'md'}, event = 'BufEnter'}
+    use {'joker1007/vim-markdown-quote-syntax', ft = {'md'}, event = 'BufEnter'}
+    --PlantUML相关
+    use {'aklt/plantuml-syntax', ft = {'puml'}, event = 'BufEnter'}
+    use {'tyru/open-browser.vim', ft = {'puml'}, event = 'BufEnter'}
+    use {'weirongxu/plantuml-previewer.vim', ft = {'puml'}, event = 'BufEnter'}
+    --翻译
+    use {'ianva/vim-youdao-translater', event = 'BufEnter'}
+    --切换中文输入法
+    use {'CodeFalling/fcitx-vim-osx', event = 'InsertEnter'}
 
-    use 'neovim/nvim-lspconfig'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/nvim-cmp'
-    use 'tzachar/cmp-tabnine'
-    use 'williamboman/nvim-lsp-installer'
+    use {'kyazdani42/nvim-web-devicons', event = 'BufEnter'}
+    use {'SmiteshP/nvim-gps'}
+    use {'nvim-lualine/lualine.nvim', after = 'nvim-gps'}
+    use {'kdheepak/tabline.nvim', after = "lualine.nvim"}
+    use {'arkav/lualine-lsp-progress', after = "lualine.nvim"}
 
+    -- lspkind
+    use {'onsails/lspkind-nvim'}
+    use {'hrsh7th/nvim-cmp'}
+    use {'hrsh7th/cmp-nvim-lsp'}
+    use {'f3fora/cmp-spell'}
+    use {'hrsh7th/cmp-buffer'}
+    use {'hrsh7th/cmp-path'}
+    use {'hrsh7th/cmp-cmdline'}
+    use {'tzachar/cmp-tabnine', run = 'sh install.sh'}
+    use {'hrsh7th/cmp-vsnip'}
+    use {'hrsh7th/vim-vsnip'}
+    use {'rafamadriz/friendly-snippets'}
+
+    use {'williamboman/nvim-lsp-installer'}
+    use {'neovim/nvim-lspconfig'}
+    --use 'itchyny/lightline.vim'
+    --use {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'}
+    --use {'f3fora/cmp-spell', after = 'nvim-cmp'}
+    --use {'hrsh7th/cmp-buffer', after = 'nvim-cmp'}
+    --use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
+    --use {'hrsh7th/cmp-cmdline', after = 'nvim-cmp'}
+    --use {'tzachar/cmp-tabnine', run = 'sh install.sh', after = 'nvim-cmp'}
+    --use {'hrsh7th/cmp-vsnip', after = 'nvim-cmp'}
+    --use {'hrsh7th/vim-vsnip', after = 'nvim-cmp'}
+    --use {'rafamadriz/friendly-snippets', after = 'nvim-cmp'}
+    --use 'rhysd/vim-operator-surround'
+
+    --use 'aymericbeaumet/vim-symlink'
     --use {'neoclide/coc.nvim', branch = "master", run = 'cd app && yarn install --frozen-lockfile'}
+    --use 'kdheepak/lazygit.nvim'
     --use 'nvim-lua/plenary.nvim'
     --use 'Shatur/neovim-session-manager'
     --use {'nvim-telescope/telescope.nvim',
@@ -120,25 +157,7 @@
                 --{'nvim-lua/plenary.nvim'}
             --}
         --}
-
-    -- Lua
-    use {
-      "ahmedkhalf/project.nvim",
-      config = function()
-        require("project_nvim").setup {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-        }
-      end
-    }
-
-
     --use 'goolord/alpha-nvim'
-    ----自动对齐代码
-    --use 'google/vim-maktaba'
-    --use 'google/vim-codefmt'
-    --use 'google/vim-glaive'
     --use 'L3MON4D3/LuaSnip'
     --use 'hrsh7th/vim-vsnip'
     --use 'hrsh7th/vim-vsnip-integ'
@@ -171,15 +190,12 @@
     --use 'regen100/cmake-language-server'
     --use 'junegunn/fzf'
     --use 'junegunn/fzf.vim'
-    ----For vsnip users.
-    --use 'hrsh7th/cmp-vsnip'
-    --use 'hrsh7th/vim-vsnip'
-    --use 'neovim/nvim-lspconfig'
-    --use 'ojroques/nvim-lspfuzzy'
-    --use 'glepnir/lspsaga.nvim'
-    --use 'hrsh7th/nvim-compe'
-    --use 'williamboman/nvim-lsp-installer'
     ----语法高亮
     --use 'scrooloose/syntastic'
-
+    --命令模式下插入当前文件全路径名
+    --也可以在insert模式下ctrl+r shift+5
+    --:put =expand('%:p')
+    --命令模式下插入缓冲区其他文件全路径名
+    --也可以在insert模式下ctrl+r shift+3
+    --:put =expand('#:p')
 end)
