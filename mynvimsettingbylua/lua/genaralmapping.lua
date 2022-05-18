@@ -10,7 +10,8 @@ local setmapping = function()
     vim.o.autoread = true
     vim.bo.autoread = true
     -- 行结尾可以跳到下一行
-    vim.o.whichwrap = 'b,s,<,>,[,],h,l'
+    --vim.o.whichwrap = 'b,s,<,>,[,],h,l'
+    vim.opt.whichwrap:append {['<'] = true, ['>'] = true, [','] = true, h = true, l = true}
     -- 鼠标支持
     vim.o.mouse = "a"
     -- 禁止创建备份文件
@@ -77,7 +78,7 @@ local setmapping = function()
     --设置超时时间
     vim.g.timeout = true
     vim.g.timeoutlen = 3000
-    vim.g.ttimeoutlen = 100
+    vim.g.ttimeoutlen = 2000
     --设置折叠
     --使用foldexpr指定的方式折叠代码
     vim.wo.foldenable = true
@@ -104,7 +105,8 @@ local setmapping = function()
     end
     --Don't pass messages to |ins-completion-menu|.
     --启动的时候不显示提示
-    vim.g.shortmess = "ati,c"
+    --vim.g.shortmess = {c=true, ati = true}
+    vim.opt.shortmess:append {c = true, ati = true}
     --vim.cmd("set shortmess=ati")
     --vim.cmd("set shortmess+=c")
     --设置光标不闪烁
@@ -123,6 +125,8 @@ local setmapping = function()
     vim.g.solarized_termcolors = 16
     vim.cmd("colorscheme solarized")
     vim.g.background = true
+    vim.cmd("highlight Search ctermbg=Black")
+    vim.cmd("highlight Search ctermfg=DarkGray")
 end
 
 local leadermap = function()
