@@ -1,13 +1,12 @@
-    --vim.cmd [[packadd! tabular]]
-        --"设置默认储存文件夹.这里表示储存在当前文档所在文件夹下的'pic'文件夹下,相当于 ./pic/
-        --let g:mdip_imgdir = '.' 
-        --"设置默认图片名称.当图片名称没有给出时,使用默认图片名称
-        --let g:mdip_imgname = ''
+    --function OpenMarkdownPreview (url)
+            --execute "silent ! chrome --new-window " . a:url
+        --endfunction
+        --let g:mkdp_browserfunc = 'OpenMarkdownPreview'
 function markdown()
     vim.cmd [[packadd! vim-markdown]]
     vim.cmd [[packadd! mathjax-support-for-mkdp]]
     vim.cmd [[packadd! markdown-preview.nvim]]
-    --vim.cmd [[packadd! md-img-paste.vim]]
+    vim.cmd [[packadd! md-img-paste.vim]]
     vim.cmd [[packadd! vim-markdown-toc]]
     vim.cmd [[packadd! markdown2ctags]]
     vim.cmd [[packadd! vim-markdown-quote-syntax]]
@@ -31,8 +30,12 @@ function markdown()
         autocmd BufNewFile,BufReadPost *.wiki set filetype=markdown
         autocmd filetype markdown nnoremap <leader>ma :<c-u>MarkdownPreview<cr>
         autocmd filetype markdown nnoremap <leader>sm :<c-u>MarkdownPreviewStop<cr>
+        "设置默认储存文件夹.这里表示储存在当前文档所在文件夹下的'pic'文件夹下,相当于 ./pic/
+        let g:mdip_imgdir = '.' 
+        "设置默认图片名称.当图片名称没有给出时,使用默认图片名称
+        let g:mdip_imgname = ''
         "设置快捷键
-        autocmd FileType markdown nmap <buffer><silent> <leader>mc :call mdip#MarkdownClipboardImage()<CR>
+        autocmd filetype markdown nnoremap <silent> <leader>mc :call mdip#markdownclipboardimage()<cr>f%i
     ]]
 end
 markdown()

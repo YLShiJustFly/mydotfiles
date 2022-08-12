@@ -26,7 +26,7 @@ function tags()
         " 禁用 gutentags 自动加载 gtags 数据库的行为
         let g:gutentags_auto_add_gtags_cscope = 0
         let $GTAGSLABEL = 'native-pygments'
-        let g:gutentags_cache_dir = expand('~/develop/.cache/tags')
+        let g:gutentags_cache_dir = expand('~/.cache/tags')
         " change focus to quickfix window after search (optional).
         let g:gutentags_plus_switch = 1
         let g:gutentags_plus_nomap = 1

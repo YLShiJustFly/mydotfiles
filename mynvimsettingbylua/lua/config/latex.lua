@@ -51,6 +51,8 @@ function latex()
               endif
             call jobstart(l:cmd + [line('.'), l:out, l:src_file_path])
         endfunction
+        let g:vimtex_syntax_enabled = 0
+        let g:vimtex_syntax_conceal_disable = 0
     ]]
 end
 latex()

@@ -112,7 +112,6 @@ local function jumpable(dir)
   end
 end
 
-
 require("luasnip.loaders.from_vscode").lazy_load() -- load freindly-snippets
 require("luasnip.loaders.from_vscode").load({ paths = { -- load custom snippets
   vim.fn.stdpath("config") .. "/my-snippets"

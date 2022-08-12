@@ -26,7 +26,7 @@ local setmapping = function()
     vim.wo.wrap = false
     vim.o.swapfile = false
     --设置更新时间
-    vim.o.updatetime = 4000
+    vim.o.updatetime = 1000
     --高亮光标所在行
     vim.wo.cursorline = true
     --取消光标闪烁
@@ -77,8 +77,8 @@ local setmapping = function()
     vim.g.wildmenu = true
     --设置超时时间
     vim.g.timeout = true
-    vim.g.timeoutlen = 3000
-    vim.g.ttimeoutlen = 2000
+    vim.g.timeoutlen = 1000
+    vim.g.ttimeoutlen = 1000
     --设置折叠
     --使用foldexpr指定的方式折叠代码
     vim.wo.foldenable = true
@@ -127,6 +127,7 @@ local setmapping = function()
     vim.g.background = true
     vim.cmd("highlight Search ctermbg=Black")
     vim.cmd("highlight Search ctermfg=DarkGray")
+    --vim.o.spell = true
 end
 
 local leadermap = function()

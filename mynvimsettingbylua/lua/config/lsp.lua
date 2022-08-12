@@ -116,10 +116,10 @@ nvim_lsp.pylsp.setup({
   capabilities = capabilities,
 })
 
--- nvim_lsp.pyright.setup{
---   on_attach = custom_attach,
---   capabilities = capabilities
--- }
+nvim_lsp.remark_ls.setup{
+  on_attach = custom_attach,
+  capabilities = capabilities
+}
 
 nvim_lsp.clangd.setup({
     on_attach = custom_attach,

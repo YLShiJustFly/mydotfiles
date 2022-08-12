@@ -1,5 +1,5 @@
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "cpp", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = {"cpp","markdown","norg"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
   highlight = {
     enable = true,              -- false will disable the whole extension
@@ -11,7 +11,7 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
   rainbow = {                                                                                                                                                                 
-    enable = true,                                                                                                                                                             
+    enable = true,
     extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
   },                                                                                                                                                                           
   -- 启用缩进
